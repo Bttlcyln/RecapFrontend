@@ -1,0 +1,71 @@
+<div
+*ngIf="dataLoaded == false"
+class="spinner-border text-primary"
+role="status"
+>
+<span class="visually-hidden">Loading...</span>
+</div>
+
+
+
+<div class="row mt-4">
+  <div id="carouselExampleIndicators" class="carousel slide " data-bs-ride="true">
+      <!-- <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExampleIndicators" *ngFor="let carImage of carImages; let i = index" 
+        [attr.data-bs-slide-to]="i" [class.active]="i == 0"></li>
+      </ol> -->
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let carImage of carImages; let i = index" [ngClass]="i == 0 ? 'active': ''">
+          <div class="row">
+            <!-- <img [src]="getImagePath(carImage)"  class="d-block fit" alt="car image"> -->
+            <img style="max-width: 50%; max-height: 50%" src="https://arabam-blog.mncdn.com/wp-content/uploads/2021/05/Range-Rover-1024x768.jpg"
+            
+              class="d-block fit" alt="car image">
+              
+          </div>
+        </div>
+      </div>
+      
+    </div> 
+</div> 
+
+<div>
+  <div class="card">
+    <div class="card-body">
+      <div *ngIf="car">
+        <h4 class="card-title text-center">{{car.brandName |uppercase}} </h4>
+        <br />
+        <tr>
+          <td><strong>Model:</strong> {{ car.carName }}</td>
+        </tr>
+        <br />
+        <tr>
+          <td><strong>Model Yılı:</strong> {{ car.modelYear }}</td>
+        </tr>
+        <br />
+        <tr>
+          <td><strong>Renk:</strong> {{ car.colorName }}</td>
+        </tr>
+        <br />
+        <tr>
+          <td><strong>Günlük Fiyat:</strong> {{ car.dailyPrice | currency : "USD" : "symbol-narrow" : "1.2-2" }}</td>
+        </tr>
+        <br />
+        <tr>
+          <td><strong>Açıklama:</strong> {{ car.description }}</td>
+        </tr>
+
+        
+
+        <br />
+        <td><button type="button" class="btn btn-warning" (click)="rentNow(car)" >Kirala</button></td>
+        <br />
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+
+

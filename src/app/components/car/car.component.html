@@ -1,0 +1,39 @@
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+  <span class="visually-hidden"></span>
+</div>
+
+<div class="mb-3">
+  <label for="filterText" class="form-label">Ürün Ara</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi">
+</div>
+<div *ngIf="filterText" class="alert alert-warning">
+{{filterText}} aradınız
+</div>
+
+<table *ngIf="dataLoaded!=false" class="table">
+  <thead>
+    <tr>
+     
+      <td>Araba Adı</td>
+      <td>Günlük Ücret</td>
+      <td>Model Yılı</td>
+      <td>Renk</td>
+      <td>Marka</td>
+      <td>Detay</td>
+    </tr>
+  </thead>
+    <tr *ngFor="let item of cars | carFilter:filterText">
+     
+      <td>{{ item.carName }}</td>
+      <td>{{ item.dailyPrice }}</td>
+      <td>{{ item.modelYear }}</td>
+      <td>{{ item.colorName }}</td>
+      <td>{{ item.brandName }}</td>
+
+      
+      <td><button type="button" class="btn btn-info" routerLink="/getcardetail/{{item.carId}}">Detaylı İncele</button></td>
+    
+      
+    </tr>
+ 
+</table>

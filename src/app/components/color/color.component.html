@@ -1,0 +1,20 @@
+<div class="alert alert-success" role="alert" style="text-align: center">
+    <strong>RENKLER</strong>
+  </div>
+  
+  <select
+    class="form-select"
+    *ngIf="colorLoaded == true"
+    [(ngModel)]="currentColor"
+    aria-label="Default select example"
+    routerLink="cars/color/{{ currentColor }}"
+  >
+    <option [ngValue]="null">Renk seçiniz</option>
+    <option
+      *ngFor="let color of colors | colorFilter : filterText"
+      [value]="color.colorId"
+    >
+      {{ color.colorName }}
+    </option>
+  </select>
+  

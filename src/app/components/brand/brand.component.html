@@ -1,0 +1,19 @@
+<div class="alert alert-success" role="alert" style="text-align: center">
+  <strong>MARKALAR</strong>
+</div>
+
+<select
+  class="form-select"
+  *ngIf="brandLoaded == true"
+  [(ngModel)]="selectedBrand"
+  aria-label="Default select example"
+  routerLink="cars/brand/{{ selectedBrand }}"
+>
+  <option [ngValue]="null">Marka seçiniz</option>
+  <option
+    *ngFor="let brand of brands | brandFilter : filterText"
+    [value]="brand.brandId"
+  >
+    {{ brand.brandName }}
+  </option>
+</select>
