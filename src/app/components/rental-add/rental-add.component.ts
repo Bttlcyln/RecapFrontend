@@ -37,8 +37,13 @@ export class RentalAddComponent implements OnInit {
       this.rentalService.add(rentalModel).subscribe(response =>{
         console.log(response)
         this.toastrService.success("Ürün Eklendi","Başaarılıı")
-        this.router.navigate(["/payments/pay"])
-      })
+        this.router.navigate(["/payments/pay"]);
+      },(errorResponse)=>{
+        const errorMessage = errorResponse.error.message || "Bir hata oluştu"
+        this.toastrService.error(errorResponse.error.message,"Hata");
+      }
+    );
+      
       
     }else{
       this.toastrService.error("Tüm Alanları Doldurunuz","Dikkat")

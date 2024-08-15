@@ -27,6 +27,9 @@ export class CarAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.createcarAddForm();
+    this.getBrands();
+    this.getColors();
   }
 
   createcarAddForm(){
@@ -73,7 +76,7 @@ export class CarAddComponent implements OnInit {
       this.brands = response.data;
     });
   }
-  gelColors(){
+  getColors(){
     this.colorService.getColors().subscribe((response)=>{
       this.colors = response.data;
     });

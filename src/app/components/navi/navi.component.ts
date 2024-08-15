@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-navi',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NaviComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router:Router,
+    private paymentService:PaymentService,
+    private toastrService:ToastrService
+  ) { }
 
   ngOnInit(): void {
+   
   }
+
+
+  
 
 }

@@ -21,7 +21,10 @@ export class CarComponent implements OnInit {
   colors : Color[]=[];
   dataLoaded = false;
   filterText ="";
- 
+  brandFilter= 0;
+  colorFilter=0;
+ detailModel: any ;
+ selectedCarId:number;
   
   constructor(private carService:CarService, 
     private activatedRoute:ActivatedRoute,
@@ -40,6 +43,8 @@ export class CarComponent implements OnInit {
       this.getCarsByColor(params["colorId"])    
     }else
     this.getCars();
+    this.getBrands();
+    this.getColors();
    
     
     })
@@ -81,5 +86,18 @@ export class CarComponent implements OnInit {
       this.dataLoaded=true;
     })
   }
+  getCarByBrandAndColor(brandId:number, colorId:number){
+    this.carService.getCarByBrandAndColor(brandId, colorId).subscribe((response) =>{
+      this.cars = response.data;
+      this.dataLoaded = true;
+    })
+  }
+clearFilter(){
+  this.getCars();
+  this.brandFilter = 0;
+  this.colorFilter = 0;
+}
+
+  
 
 }

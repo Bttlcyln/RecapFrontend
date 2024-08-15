@@ -5,9 +5,61 @@
 <div class="mb-3">
   <label for="filterText" class="form-label">Ürün Ara</label>
   <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi">
+
+  <div class="row">
+    <div class="col-md-4">
+      <label>Marka seçiniz</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        [(ngModel)]="brandFilter"
+      >
+        <option *ngFor="let brand of brands" [value]="brand.brandId">
+          {{ brand.brandName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label>Renk seçiniz</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        [(ngModel)]="colorFilter"
+      >
+        <option *ngFor="let color of colors" [value]="color.colorId">
+          {{ color.colorName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-info"
+        (click)="getCarByBrandAndColor(brandFilter, colorFilter)"
+      >
+        Filtrele
+      </button>
+    </div>
+    <div class="col-md-2">
+      
+      <button
+        type="button"
+        class="btn btn-warning"
+        style="margin-left: 10%"
+        (click)="clearFilter()"
+      >
+        Temizle
+      </button>
+    </div>
+  </div>
+
 </div>
 <div *ngIf="filterText" class="alert alert-warning">
 {{filterText}} aradınız
+
+
 </div>
 
 <table *ngIf="dataLoaded!=false" class="table">
@@ -35,5 +87,6 @@
     
       
     </tr>
+    
  
 </table>

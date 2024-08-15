@@ -1,1 +1,13 @@
-<p>car-add works!</p>
+<form [formGroup]="carAddForm" (ngSubmit)="add()">
+    <label for="name">Name:</label>
+    <input id="name" formControlName="name">
+  
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email">
+  
+    <label for="age">Age:</label>
+    <input id="age" type="number" formControlName="age">
+  
+    <button type="submit">Submit</button>
+  </form>
+  
