@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'brands/add', component: BrandAddComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  
 ];
 
 @NgModule({

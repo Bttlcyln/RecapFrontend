@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators ,FormControl} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
@@ -27,12 +27,12 @@ export class CarAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createcarAddForm();
+    this.createCarAddForm();
     this.getBrands();
     this.getColors();
   }
 
-  createcarAddForm(){
+  createCarAddForm(){
     this.carAddForm = this.formBuilder.group({
       carName: ["",Validators.required],
       brandId:[null,Validators.required],

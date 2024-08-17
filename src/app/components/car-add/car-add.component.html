@@ -1,13 +1,61 @@
-<form [formGroup]="carAddForm" (ngSubmit)="add()">
-    <label for="name">Name:</label>
-    <input id="name" formControlName="name">
-  
-    <label for="email">Email:</label>
-    <input id="email" formControlName="email">
-  
-    <label for="age">Age:</label>
-    <input id="age" type="number" formControlName="age">
-  
-    <button type="submit">Submit</button>
-  </form>
-  
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Araç Ekle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="carAddForm">
+          <label for="carName" >Araba Adı</label>
+          <div class="form-group">
+            <input
+              type="text"
+              id="carName"
+              formControlName="carName"
+              class="form-control"
+              placeholder="Araç Adı"/>           
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              id="brandId"
+              formControlName="brandId"
+              class="form-control"
+              placeholder="Marka"/>           
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              id="colorId"
+              formControlName="colorId"
+              class="form-control"
+              placeholder="Renk"/>           
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              id="dailyPrice"
+              formControlName="dailyPrice"
+              class="form-control"
+              placeholder="Günlük Ücret"/>           
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              id="modelYear"
+              formControlName="modelYear"
+              class="form-control"
+              placeholder="Model Yılı"/>           
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="description"
+              formControlName="description"
+              class="form-control"
+              placeholder="Araç Açıklama"/>           
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
