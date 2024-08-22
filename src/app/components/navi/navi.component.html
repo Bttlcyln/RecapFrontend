@@ -1,44 +1,82 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<div>
+  <nav
+    class="navbar navbar-expand-lg"
+    style="background-color: rgb(163, 215, 240)"
+  >
+  <a class="navbar-brand" style="color: rgb(233, 9, 9);" href="#">CEYLAN OTO KİRALAMA</a>
+    <div class="container-fluid">
+      
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"> </span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            
+          </li>
+      
+        </ul>
+      </div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-        
-          <a class="nav-link" href="/rentals">KİRALAMALAR</a>
-          
+        <li class="nav-item" *ngIf="name" style="text-align: end">
+          <div class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="customerDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png"
+                class="profile-image"
+              />
+              {{ name }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a
+                style="cursor: pointer"
+                class="dropdown-item"
+                (click)="updateProfile()"
+                >Profili güncelle</a
+              >
+              <a
+                style="cursor: pointer"
+                class="dropdown-item"
+                (click)="updatePassword()"
+                >Şifre değiştir</a
+              >
+              <a
+        class="nav-link active"
+        role="button"
+        aria-expanded="false"
+        (click)="logOut()"
+      >
+        <strong>Çıkış Yap</strong>
+      </a>
+
+            </div>
+          </div>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/cars/add">Araba Ekle</a>
-        </li> -->
-
-        
-
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Bişeler
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      
+      <a *ngIf="!loginCheck"
+        class="nav-link active"
+        role="button"
+        aria-expanded="false"
+        routerLink="/login"
+      >
+        <strong>Giriş Yap</strong>
+      </a>
     </div>
-  </div>
-</nav>
-
-
+  </nav>
+</div>

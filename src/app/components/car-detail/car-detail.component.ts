@@ -77,6 +77,6 @@ export class CarDetailComponent implements OnInit {
 
 
   rentNow(car:Car){
-    this.route.navigate(["rentals/add"]);
+    this.route.navigate(["rentals/add/" + this.carId]);
   }
 }

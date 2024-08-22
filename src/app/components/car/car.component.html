@@ -4,7 +4,7 @@
 
 <div class="mb-3">
   <label for="filterText" class="form-label">Ürün Ara</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi">
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Arama ifadesi">
 
   <div class="row">
     <div class="col-md-4">
@@ -33,25 +33,9 @@
       </select>
     </div>
 
-    <div class="col-md-2">
-      <button
-        type="button"
-        class="btn btn-info"
-        (click)="getCarByBrandAndColor(brandFilter, colorFilter)"
-      >
-        Filtrele
-      </button>
-    </div>
-    <div class="col-md-2">
-      
-      <button
-        type="button"
-        class="btn btn-warning"
-        style="margin-left: 10%"
-        (click)="clearFilter()"
-      >
-        Temizle
-      </button>
+    <div class="col-md-4" style="display: flex; margin-top: 20px;">
+      <button type="button" class="btn btn-info" (click)="getCarByBrandAndColor(brandFilter, colorFilter)">Filtrele</button>
+      <button type="button" class="btn btn-danger" style="margin-left: 10px;" (click)="clearFilter()">Filtreyi Temizle</button>
     </div>
   </div>
 
@@ -90,3 +74,25 @@
     
  
 </table>
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Yeni Ekle
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <app-car-add></app-car-add>
+      </div>
+     
+    </div>
+  </div>
+</div>
+

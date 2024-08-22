@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Rental } from 'src/app/models/rental';
 import { RentalService } from 'src/app/services/rental.service';
@@ -12,21 +12,27 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class RentalAddComponent implements OnInit {
   rentalAddForm: FormGroup;
+  carId: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
     private toastrService: ToastrService,
     private router:Router,
+    private activatedRoute:ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['carId']) {
+        this.carId = params['carId'];
+      }
+    });
     this.createRentalAddForm();
   }
 
   createRentalAddForm(){
     this.rentalAddForm=this.formBuilder.group({
-      carId:["",Validators.required],
       rentDate:["",Validators.required],
       returnDate:["",Validators.required],       
     });
@@ -34,8 +40,9 @@ export class RentalAddComponent implements OnInit {
   add() {
     if(this.rentalAddForm.valid){
       let rentalModel= Object.assign({},this.rentalAddForm.value)
+      rentalModel.carId = Number(this.carId);
+      
       this.rentalService.add(rentalModel).subscribe(response =>{
-        console.log(response)
         this.toastrService.success("Ürün Eklendi","Başaarılıı")
         this.router.navigate(["/payments/pay"]);
       },(errorResponse)=>{

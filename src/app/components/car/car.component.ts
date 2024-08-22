@@ -25,6 +25,9 @@ export class CarComponent implements OnInit {
   colorFilter=0;
  detailModel: any ;
  selectedCarId:number;
+
+
+ testEnable = false;
   
   constructor(private carService:CarService, 
     private activatedRoute:ActivatedRoute,
@@ -98,6 +101,8 @@ clearFilter(){
   this.colorFilter = 0;
 }
 
-  
+test(){
+  this.testEnable = true;
+}
 
 }
