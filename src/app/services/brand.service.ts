@@ -17,19 +17,18 @@ export class BrandService {
   getBrands():Observable<ListResponseModel<Brand>> {
     let newPath = this.apiUrl + 'getall';
     return this.httpClient.get<ListResponseModel<Brand>>(newPath);
-
-   
   }
 
   getBrandById(brandId: number): Observable<SingleResponseModel<Brand>> {
     let newPath = this.apiUrl + 'getbyid?id=' + brandId;
     return this.httpClient.get<SingleResponseModel<Brand>>(newPath);
   } 
+  
   add(brand: Brand): Observable<ResponseModel> {
     let newPath = this.apiUrl + 'add';
     return this.httpClient.post<ResponseModel>(newPath, brand);
   }
- 
+
   update(brand: Brand): Observable<ResponseModel> {
     let newPath = this.apiUrl + 'update';
     return this.httpClient.put<ResponseModel>(newPath, brand);
@@ -39,5 +38,4 @@ export class BrandService {
     let newPath = this.apiUrl + 'delete?brandId=' + brandId;
     return this.httpClient.delete<ResponseModel>(newPath);
   }
-  
 }

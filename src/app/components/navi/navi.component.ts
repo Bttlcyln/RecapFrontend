@@ -5,6 +5,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 import jwt_decode from "jwt-decode";
 import { Subscription, interval } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navi',
@@ -14,20 +15,28 @@ import { ToastrService } from 'ngx-toastr';
 export class NaviComponent implements OnInit, OnDestroy {
   payments: Payment[];
   loginCheck = false;
+  adminCheck = false;
   subscription: Subscription
   name = "";
+  rol = "";
+  
 
   constructor(
     private paymentService: PaymentService,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    
   ) { }
 
   ngOnInit(): void {
+   
+ this.isAdmin();
+ 
     this.subscription = interval(500).subscribe(() => {
       this.check();
     });
     this.getPayments();
+   
   }
 
   ngOnDestroy() {
@@ -60,7 +69,28 @@ export class NaviComponent implements OnInit, OnDestroy {
   DecodeToken(token: string): string {
     return jwt_decode(token);
   }
+
+
+
+  isAdmin(){
+    const token = localStorage.getItem("token");
+    if (token != null){
+      this.adminCheck = true;
+    }else
+    return;
+    if (this.adminCheck){
+      if (!this.rol){
+        try {
+          const decoded : any = jwt_decode(token);
+          this.rol = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+        }catch (error){
+        }
+      }
+    }
+  }
  
+
+
   getPayments() {
     this.paymentService.getPayments().subscribe((response) => {
       this.payments = response.data;
@@ -98,4 +128,6 @@ export class NaviComponent implements OnInit, OnDestroy {
   colorAdd(){
     this.router.navigateByUrl('colors/add');
   }
+
+  
 }

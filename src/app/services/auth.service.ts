@@ -9,10 +9,13 @@ import { Observable } from 'rxjs';
 import { UserUpdate } from '../models/userUpdate';
 import { PasswordUpdate } from '../models/passwordUpdate';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  
   apiUrl = 'https://localhost:44319/api/auth/';
 
   constructor(private httpClient:HttpClient) { }
@@ -39,17 +42,12 @@ passwordUpdate(passwordUpdateModel: PasswordUpdate){
   return this.httpClient.put<ResponseModel>(newPath, passwordUpdateModel);
 }
 
-
 isAuthenticated(){
   if(localStorage.getItem("token")){
     return true;
   }
   else{
     return false;
-  }
+  } 
 }
-
-
- 
-  
 }

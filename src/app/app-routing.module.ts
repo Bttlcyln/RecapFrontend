@@ -20,6 +20,7 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { ColorDeleteComponent } from './components/color-delete/color-delete.component';
+import { NaviComponent } from './components/navi/navi.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'brands/list', component: BrandComponent },
   { path: 'update', component: UserUpdateComponent},
+  
   
 ];
 
