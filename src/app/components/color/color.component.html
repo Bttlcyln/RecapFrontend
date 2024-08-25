@@ -1,20 +1,28 @@
-<!-- <div class="alert alert-success" role="alert" style="text-align: center">
-    <strong>RENKLER</strong>
-  </div>
-  
-  <select
-    class="form-select"
-    *ngIf="colorLoaded == true"
-    [(ngModel)]="currentColor"
-    aria-label="Default select example"
-    routerLink="cars/color/{{ currentColor }}"
-  >
-    <option [ngValue]="null">Renk seçiniz</option>
-    <option
-      *ngFor="let color of colors | colorFilter : filterText"
-      [value]="color.colorId"
-    >
-      {{ color.colorName }}
-    </option>
-  </select>
-   -->
+
+<table *ngIf="colorLoaded!=false" class="table">
+  <thead>
+    <tr>
+     
+      
+      <td>Marka</td>
+      <td>GÜNCELLE-SİL</td>
+    </tr>
+  </thead>
+  <tr *ngFor="let item of colors | colorFilter:filterText">
+     
+   
+    <td>{{ item.colorName }}</td>
+ 
+   
+  <a>
+    <div>
+      <td><button type="button" class="btn btn-info" >Güncelle</button></td>
+      <td><button type="button" class="btn btn-danger" >Sil</button></td>
+    </div>
+  </a>
+    
+    
+  </tr>
+    
+ 
+</table>

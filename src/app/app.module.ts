@@ -34,6 +34,7 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { CarListComponent } from './components/car-list/car-list.component';
 
 
 
@@ -69,6 +70,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     UserUpdateComponent,
     RegisterComponent,
     LoginComponent,
+    CarListComponent,
     
     
     

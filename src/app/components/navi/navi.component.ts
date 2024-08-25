@@ -18,7 +18,7 @@ export class NaviComponent implements OnInit, OnDestroy {
   adminCheck = false;
   subscription: Subscription
   name = "";
-  rol = "";
+  roles: Array<string>;
   
 
   constructor(
@@ -34,6 +34,7 @@ export class NaviComponent implements OnInit, OnDestroy {
  
     this.subscription = interval(500).subscribe(() => {
       this.check();
+      this.isAdmin();
     });
     this.getPayments();
    
@@ -72,20 +73,22 @@ export class NaviComponent implements OnInit, OnDestroy {
 
 
 
+
   isAdmin(){
     const token = localStorage.getItem("token");
-    if (token != null){
-      this.adminCheck = true;
-    }else
-    return;
-    if (this.adminCheck){
-      if (!this.rol){
-        try {
-          const decoded : any = jwt_decode(token);
-          this.rol = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-        }catch (error){
+    
+    if(token){
+        if (!this.roles){
+          try {
+            const decoded : any = jwt_decode(token);
+            this.roles = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+
+
+            this.adminCheck = this.roles.includes('admin');
+
+          
+          }catch (error){ }
         }
-      }
     }
   }
  
@@ -101,6 +104,7 @@ export class NaviComponent implements OnInit, OnDestroy {
     localStorage.removeItem('token')
     this.router.navigateByUrl("login")
     this.loginCheck = false;
+    this.adminCheck = false;
     this.name = "";
     this.toastrService.error("Sistemden çıkış yapıldı")
   }

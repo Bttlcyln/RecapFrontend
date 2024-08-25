@@ -1,19 +1,29 @@
-<!-- <div class="alert alert-success" role="alert" style="text-align: center">
-  <strong>MARKALAR</strong>
-</div>
 
-<select
-  class="form-select"
-  *ngIf="brandLoaded == true"
-  [(ngModel)]="selectedBrand"
-  aria-label="Default select example"
-  routerLink="cars/brand/{{ selectedBrand }}"
->
-  <option [ngValue]="null">Marka seçiniz</option>
-  <option
-    *ngFor="let brand of brands | brandFilter : filterText"
-    [value]="brand.brandId"
-  >
-    {{ brand.brandName }}
-  </option>
-</select> -->
+<table *ngIf="brandLoaded!=false" class="table">
+  <thead>
+    <tr>
+     
+      
+      <td>Marka</td>
+      <td>GÜNCELLE-SİL</td>
+    </tr>
+  </thead>
+  <tr *ngFor="let item of brands | brandFilter:filterText">
+     
+    <td>{{ item.brandName }}</td>
+    
+    
+
+    
+    <a>
+      <div>
+        <td><button type="button" class="btn btn-info" >Güncelle</button></td>
+        <td><button type="button" class="btn btn-danger" >Sil</button></td>
+      </div>
+    </a>
+    
+    
+  </tr>
+  
+ 
+</table>

@@ -13,7 +13,7 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandDeleteComponent implements OnInit {
   brand: Brand | null = null;
   brandId!: number;
-  brandName: string = "";
+  brandName: string;
   brandDeleteForm: FormGroup;
 
   constructor(

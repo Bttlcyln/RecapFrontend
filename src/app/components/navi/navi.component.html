@@ -27,15 +27,15 @@
       
         </ul>
       </div>
-<ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+<ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="adminCheck">
   <li class="nav-item dropdown">
     <a  class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       Yönetici Paneli
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li><a class="dropdown-item" href="#">Araç Yönetimi</a></li>
-      <li><a class="dropdown-item" routerLink="/brands/add">Marka Yönetimi</a></li>
-      <li><a class="dropdown-item" routerLink="/colors/add">Renk Yönetimi</a></li>
+      <li><a class="dropdown-item" routerLink="/cars-management">Araç Yönetimi</a></li>
+      <li><a class="dropdown-item" routerLink="/brand-management">Marka Yönetimi</a></li>
+      <li><a class="dropdown-item" routerLink="/color-management">Renk Yönetimi</a></li>
       
       
     </ul>
@@ -98,11 +98,7 @@
     </div>
   </nav>
 </div>
-
-<button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Yeni Araç Ekle
-</button>
-
+<!-- <button *ngIf="adminCheck" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Yeni Araç Ekle</button>
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -117,6 +113,7 @@
      
     </div>
   </div>
-</div>
+</div> -->
+
 
 

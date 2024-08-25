@@ -21,6 +21,8 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { ColorDeleteComponent } from './components/color-delete/color-delete.component';
 import { NaviComponent } from './components/navi/navi.component';
+import { ColorComponent } from './components/color/color.component';
+import { CarListComponent } from './components/car-list/car-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
@@ -39,13 +41,18 @@ const routes: Routes = [
   { path: 'cars/color/update/:colorId', component: ColorUpdateComponent},
   { path: 'colors/delete/:colorId', component: ColorDeleteComponent },
   { path: 'payments/getall', component: PaymentComponent },
-  { path: 'colors/add', component: ColorAddComponent },
-  { path: 'brands/add', component: BrandAddComponent },
+  { path: 'color-management', component: ColorComponent },
+  { path: 'brand-management', component: BrandComponent },
   { path: 'brands/delete/:brandId', component: BrandDeleteComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'brands/list', component: BrandComponent },
   { path: 'update', component: UserUpdateComponent},
+  { path: 'cars-management', component: CarListComponent },
+  { path: 'brands/add', component: BrandAddComponent},
+  { path: 'colors/add', component: ColorAddComponent},
+
+
   
   
 ];

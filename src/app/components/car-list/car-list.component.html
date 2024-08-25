@@ -1,0 +1,46 @@
+<div>
+    <button *ngIf="adminCheck" type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Yeni Araç Ekle</button>
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <app-car-add></app-car-add>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+<table *ngIf="dataLoaded != false" class="table">
+  <thead>
+    <tr>
+      <td>Araç Adı</td>
+      <td>Marka Adı</td>
+      <td>Araç Rengi</td>
+      <td>Model Yılı</td>
+      <td>GÜNCELLE-SİL</td>
+
+    </tr>
+  </thead>
+  <tr *ngFor="let item of cars | carFilter : filterText">
+    <td>{{ item.carName }}</td>
+    <td>{{ item.brandName }}</td>
+    <td>{{ item.colorName }}</td>
+    <td>{{ item.modelYear }}</td>
+
+    <a>
+      <div>
+        <td><button type="button" class="btn btn-info">Güncelle</button></td>
+        <td><button type="button" class="btn btn-danger">Sil</button></td>
+      </div>
+    </a>
+  </tr>
+</table>
