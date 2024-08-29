@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,9 +11,11 @@ import { BrandService } from 'src/app/services/brand.service';
   styleUrls: ['./brand-update.component.css'],
 })
 export class BrandUpdateComponent implements OnInit {
+
+  @Input() brandId?: number;
+
   brandUpdateForm: FormGroup = new FormGroup({});
   brand: Brand | null = null;
-  brandId!: number;
   brandName: string | null = null;
   
   constructor(
@@ -24,11 +26,19 @@ export class BrandUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.brandId = params['brandId'];
-      this.getBrandById(params['brandId']);
-      this.createBrandUpdateForm();
-    });
+
+    if(this.brandId){
+      this.getBrandById(this.brandId);
+    } else {
+      this.activatedRoute.params.subscribe((params) => {
+        if(params['brandId']){
+          this.brandId = params['brandId'];
+          this.getBrandById(params['brandId']);
+        }
+      });
+    }
+
+    this.createBrandUpdateForm();
   }
  
   createBrandUpdateForm() {

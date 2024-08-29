@@ -7,7 +7,7 @@
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Hızlı Araç Ekleme</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -19,28 +19,72 @@
 </div>
 
 
-<table *ngIf="dataLoaded != false" class="table">
+<table *ngIf="dataLoaded != false" class="table table-hover">
   <thead>
     <tr>
-      <td>Araç Adı</td>
-      <td>Marka Adı</td>
-      <td>Araç Rengi</td>
-      <td>Model Yılı</td>
-      <td>GÜNCELLE-SİL</td>
+      <th scope="col">#</th>
+      <th scope="col">Araç Adı</th>
+      <th scope="col">Marka Adı</th>
+      <th scope="col">Araç Rengi</th>
+      <th scope="col">Model Yılı</th>
+      <th class="saga-yasla" scope="col">Eylemler</th>
 
     </tr>
   </thead>
+  <tbody>
   <tr *ngFor="let item of cars | carFilter : filterText">
+    <td>{{ item.carId }}</td>
     <td>{{ item.carName }}</td>
     <td>{{ item.brandName }}</td>
     <td>{{ item.colorName }}</td>
     <td>{{ item.modelYear }}</td>
+    <td class="saga-yasla">
 
     <a>
-      <div>
-        <td><button type="button" class="btn btn-info">Güncelle</button></td>
-        <td><button type="button" class="btn btn-danger">Sil</button></td>
-      </div>
+      
+        <td><button type="button" (click)="updateDialogVisibleControl(item.carId)"
+           class="btn btn-info">Güncelle</button></td>
+        <td><button type="button" style="margin-left: 10px;" (click)="deleteDialogVisibleControl(item.carId)"
+           class="btn btn-danger">Sil</button></td>
+      
     </a>
+  </td>
   </tr>
+</tbody>
 </table>
+
+<div class="modal fade show d-block" *ngIf="deleteDialogVisible" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-modal="true" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Bilgilendirme</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="deleteDialogVisibleControl()"></button>
+      </div>
+      <div class="modal-body">
+        Bu markayı silmek istediğine emin misin?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="deleteDialogVisibleControl()">Kapat</button>
+        <button type="button" (click)="delete()" class="btn btn-primary">Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade show d-block" *ngIf="updateDialogVisible" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-modal="true" role="dialog" style="background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered custom-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="updateDialogVisibleControl()"></button>
+      </div>
+      <div class="modal-body">
+        <app-car-update [carId]="selectedCarId"></app-car-update>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

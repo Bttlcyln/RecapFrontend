@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,12 +15,14 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./car-update.component.css'],
 })
 export class CarUpdateComponent implements OnInit {
+  @Input() carId?: number;
+
   cars: Car[];
   brands: Brand[];
   colors: Color[];
   carUpdateForm: FormGroup = new FormGroup({});
   car: Car | null = null;
-  carId!: number;
+ // carId!: number;
   dailyPrice!: number;
   carName: string | null = null;
   brandId!: number;
@@ -40,18 +42,24 @@ export class CarUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.carId = params['carId'];
-      if(params['brandId']){
-        this.getCarByBrand(params['brandId']);
-      }else if(params['colorId']){
-        this.getCarByColor(params['colorId']);
-      }else if(params['carId']){
-        this.getCarById(params['carId']);
+   if(this.carId){
+    this.getCarById(this.carId);
+
+   }else {
+    this.activatedRoute.params.subscribe((params)=>{
+      if(params["carId"]){
+        this.carId=params["carId"];
+        this.getCarById(params["carId"]);
+      }else if(params["brandId"]){
+        this.getCarByBrand(params["brandId"])
+      }else if(params["colorId"]){
+        this.getCarByColor(params["colorId"])
       }
-      this.getBrands();
-      this.getColors();
     });
+   }
+   this.getBrands();
+   this.getColors();
+   this.createCarUpdateForm();
   }
 
   createCarUpdateForm() {
@@ -93,8 +101,8 @@ export class CarUpdateComponent implements OnInit {
     }
   }
 
-  getCarById(id: number) {
-    this.carService.getCarById(id).subscribe((response) => {
+  getCarById(carId: number) {
+    this.carService.getCarById(carId).subscribe((response) => {
       this.car = response.data;
       this.carId = this.car.carId;
       this.dailyPrice = this.car.dailyPrice;

@@ -1,0 +1,22 @@
+.custom-modal {
+    max-width: 90vw; /* Ekran genişliğinin %90'ı */
+    max-height: 80vh; /* Ekran yüksekliğinin %80'i */
+    width: auto; /* Genişlik içerik kadar olacak */
+    height: auto; /* Yükseklik içerik kadar olacak */
+    overflow-y: auto; /* İçerik taşarsa kaydırma */
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh; /* İçerik maksimum ekranın %80'i kadar */
+  }
+  
+  .modal-body {
+    overflow-y: auto; /* İçerik taşarsa kaydırma */
+  }
+
+  .saga-yasla {
+    text-align: right; /* Sağa hizalar */
+  }
+  

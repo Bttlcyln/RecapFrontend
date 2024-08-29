@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,9 +11,11 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./color-update.component.css'],
 })
 export class ColorUpdateComponent implements OnInit {
+
+  @Input() colorId?: number;
+
   colorUpdateForm: FormGroup = new FormGroup({});
   color: Color | null = null;
-  colorId!: number;
   colorName: string | null = null;
  
   constructor(
@@ -24,11 +26,18 @@ export class ColorUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.colorId = params['colorId'];
-      this.getColorById(params['colorId']);
-      this.createColorUpdateForm();
-    });
+    if(this.colorId){
+      this.getColorById(this.colorId);
+    } else {
+      this.activatedRoute.params.subscribe((params) => {
+        if(params['brandId']){
+          this.colorId = params['brandId'];
+          this.getColorById(params['brandId']);
+        }
+      });
+    }
+
+    this.createColorUpdateForm();
   }
 
   createColorUpdateForm() {

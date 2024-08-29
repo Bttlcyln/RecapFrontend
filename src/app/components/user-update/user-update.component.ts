@@ -24,6 +24,7 @@ export class UserUpdateComponent implements OnInit {
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
     private userService: UserService,
+    
   ) {}
  
   ngOnInit(): void {
@@ -55,7 +56,7 @@ export class UserUpdateComponent implements OnInit {
 
       console.log(userModel);
 
-      this.authService.update(userModel).subscribe((response) => {
+      this.userService.update(userModel).subscribe((response) => {
         this.toastrService.success('İşlem başarıyla tamamlandı', 'Başarılı');
       });
     } else {
@@ -64,7 +65,7 @@ export class UserUpdateComponent implements OnInit {
   }
 
   getByMail(email: string) {
-    this.authService.getByMail(email).subscribe((response) => {
+    this.userService.getByMail(email).subscribe((response) => {
       if (response) {
         const value = {
           firstName: response.firstName,

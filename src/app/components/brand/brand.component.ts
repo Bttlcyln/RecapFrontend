@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
+import { AdminCheckService } from 'src/app/services/admin-check.service';
 import { BrandService } from 'src/app/services/brand.service';
 
 @Component({
@@ -8,15 +10,32 @@ import { BrandService } from 'src/app/services/brand.service';
   styleUrls: ['./brand.component.css'],
 })
 export class BrandComponent implements OnInit {
+  
   brands: Brand[] = [];
   currentBrand: Brand |null;
   filterText ="";
   brandLoaded:boolean = false;
   selectedBrand: Brand | null = null;
-  constructor(private brandService: BrandService) {}
+  adminCheck: boolean = false;
+
+  updateDialogVisible = false;
+  deleteDialogVisible = false;
+
+  selectedBrandId: number;
+
+
+  constructor(
+    private brandService: BrandService,
+    private adminService: AdminCheckService,
+    private toastr: ToastrService
+    
+
+  ) {}
 
   ngOnInit(): void {
     this.getBrands();
+    this.adminCheck = this.adminService.isAdmin();
+    
   }
 
   getBrands() {
@@ -41,6 +60,34 @@ export class BrandComponent implements OnInit {
       return 'list-group-item';
     }
   }
+
+
+  deleteDialogVisibleControl(id?: any){
+    if(id){
+      this.selectedBrandId = id;
+    }
+    this.deleteDialogVisible =!this.deleteDialogVisible;
+  }
+
+  updateDialogVisibleControl(id?: any){
+    if(id){
+      this.selectedBrandId = id;
+    }
+    this.updateDialogVisible =!this.updateDialogVisible;
+  }
+
+  delete(){
+      this.brandService.delete(this.selectedBrandId).subscribe((res) => {
+        if(res.success){
+            this.toastr.info(res.message);
+            this.deleteDialogVisible = !this.deleteDialogVisible;
+            this.getBrands();
+        } else {
+          this.toastr.error(res.message);
+        }
+      })
+  }
+
 
   getAllBrandClass() {
     if (!this.currentBrand) {

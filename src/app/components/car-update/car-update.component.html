@@ -36,7 +36,7 @@
                 class="form-select"
                 aria-label="Default select example"
                 formControlName="brandId"
-                [(ngModel)]="selectedBrandId"
+               
               >
                 <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
                   {{ brand.brandName }}
@@ -51,7 +51,7 @@
                 class="form-select"
                 aria-label="Default select example"
                 formControlName="colorId"
-                [(ngModel)]="selectedColorId"
+                
               >
                 <option *ngFor="let color of colors" [ngValue]="color.colorId">
                   {{ color.colorName }}
