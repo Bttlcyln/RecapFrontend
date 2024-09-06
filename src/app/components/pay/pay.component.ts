@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Payment } from 'src/app/models/payment';
+import { PaymentStorageService } from 'src/app/services/payment-storage.service';
 import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
@@ -17,11 +18,13 @@ export class PayComponent implements OnInit {
     private formBuilder: FormBuilder,
     private paymentService: PaymentService,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private paymentStorageService: PaymentStorageService
   ) {}
 
   ngOnInit(): void {
     this.createPayAddForm();
+    
   }
 
   createPayAddForm() {
@@ -34,12 +37,31 @@ export class PayComponent implements OnInit {
     });
   }
 
+  onUseSavedCardChanged(event: any) {
+    if (event.target.checked) {
+      const savedCardInfo = this.paymentStorageService.getCardInfo();
+      if (savedCardInfo) {
+        this.payAddForm.patchValue(savedCardInfo);
+        this.toastrService.info('Kayıtlı kart bilgileri yüklendi.', 'Bilgi');
+      } else {
+        this.toastrService.warning('Kayıtlı kart bilgisi bulunamadı.', 'Uyarı');
+      }
+    } else {
+      this.payAddForm.reset();
+    }
+  }
+
   add() {
     if (this.payAddForm.valid) {
       let pay: Payment = Object.assign({}, this.payAddForm.value);
       this.paymentService.addPayments(pay).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
+
+          if(confirm("Kart bilgilerini kaydetmek istiyor musun?")){
+            this.paymentStorageService.saveCardInfo(pay);
+            this.toastrService.success("Kart Bilgileri kaydedildi.","Başarılı");
+          }
           this.homePage();
         },
         (responseError) => {
